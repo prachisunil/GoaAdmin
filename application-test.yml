@@ -1,0 +1,105 @@
+spring:
+  application:
+    name: adminservice
+  redis:
+    host: 10.1.6.8
+    port: 6379
+    pool:
+      min-idle: 5
+      
+  datasource:
+    url: jdbc:mysql://dusane-test.cluster-cn0ic8c4su0f.ap-south-1.rds.amazonaws.com/goalottery
+    username: goalottery
+    password: 'MsVF8eX7pSfWqHkh'
+    driverClassName: com.mysql.cj.jdbc.Driver
+    maxPoolsize: 2
+    leakDetectionDuration : 60000
+    hikari:
+        connection-test-query: SELECT 1
+
+    write:
+       url: jdbc:mysql://dusane-test.cluster-cn0ic8c4su0f.ap-south-1.rds.amazonaws.com/goalottery
+       username: goalottery
+       password: 'MsVF8eX7pSfWqHkh'
+       driverClassName: com.mysql.cj.jdbc.Driver
+       maxPoolsize: 2
+       leakDetectionDuration : 60000
+       hikari:
+            maximum-pool-size: 2
+            minimum-idle: 1
+            connection-timeout: 30000
+            idle-timeout: 60000
+            max-lifetime: 180000
+            pool-name: AdminWriteHikariConnPool
+
+    read:
+       url: jdbc:mysql://dusane-test.cluster-ro-cn0ic8c4su0f.ap-south-1.rds.amazonaws.com/goalottery
+       username: goalottery
+       password: 'MsVF8eX7pSfWqHkh'
+       driverClassName: com.mysql.cj.jdbc.Driver
+       maxPoolsize: 2
+       leakDetectionDuration : 60000
+       hikari:
+            maximum-pool-size: 2
+            minimum-idle: 1
+            connection-timeout: 30000
+            idle-timeout: 60000
+            max-lifetime: 180000
+            pool-name: AdminReadHikariConnPool
+           
+    tomcat:
+      max-active: 2000
+      minEvictableIdleTimeMillis: 5000
+      validationQuery: SELECT 1
+      minIdle: 1
+      maxIdle: 5
+      initialSize: 1
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+    
+    properties:
+      hibernate:  
+            proc.param_null_passing: true
+    show-sql: true
+server:
+  port: 6005
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://10.1.7.193:8081/eureka/
+  instance:
+    hostname:  10.1.7.193
+opas:
+    host: http://localhost:8000
+google:
+  recaptcha:
+    site:
+      key: 6LevzusUAAAAAJ0NyjZU6ijBi-V_MOMoZ6m0YWhk
+    secret:
+      key: 6LevzusUAAAAANtORZgMRom37-MSm6nzoaeVeLoP
+    verify:
+      url: https://www.google.com/recaptcha/api/siteverify
+serverTime:
+  offset: '+05:30'
+  zone: 'IST'
+IMAGE:
+  BUCKET:
+    LOCATION: /var/www/gggstorage
+S3:
+  BUCKET:
+    LOCATION: dusane-test-bucket
+amazon-aws-url: https://api-test-dus-4355h.ggglottery.com:8443
+file-location: /var/www/gggstorage
+
+s3-bucket:
+  name: ggg-customer-dev
+  expiration_time_in_minutes: 30
+  region: ap-south-1
+
+aws-credentials:
+  access_key_id: AKIAUW4RASHVRTSYCKID
+  secret_access_key: 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
+
